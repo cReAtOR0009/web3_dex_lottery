@@ -70,7 +70,7 @@ contract Raffle is VRFConsumerBaseV2, AutomationCompatibleInterface {
     function enterRaffle() public payable {
          // require(msg.value >= i_entranceFee, "Not enough value sent");
         // require(s_raffleState == RaffleState.OPEN, "Raffle is not open");
-        require(msg.value > i_entranceFee, "not enough eth ");
+        // require(msg.value > i_entranceFee, "not enough eth ");
 
         if (msg.value < i_entranceFee) {
             revert Raffle_notEnoughEthEntered();
@@ -131,7 +131,7 @@ contract Raffle is VRFConsumerBaseV2, AutomationCompatibleInterface {
         emit WinnerPicked(recentWinner);
     }
 
-    function getEntranceFes() public view returns (uint256) {
+    function getEntranceFee() public view returns (uint256) {
         return i_entranceFee;
     }
 
@@ -143,7 +143,7 @@ contract Raffle is VRFConsumerBaseV2, AutomationCompatibleInterface {
         return s_recentWinner;
     }
 
-     function getRaffleaState() public view returns (RaffleState) {
+     function getRaffleState() public view returns (RaffleState) {
         return s_raffleState;
     }
 
@@ -154,12 +154,16 @@ contract Raffle is VRFConsumerBaseV2, AutomationCompatibleInterface {
         return s_players.length;
     }
 
-     function getTimeStamp() public view returns (uint256) {
+     function getLastTimeStamp() public view returns (uint256) {
         return s_lastTimeStamp;
     }
 
     // function getRequestConfirmation
      function getRequestConfirmation() public pure returns (uint256) {
         return REQUEST_CONFIRMATIONS;
+    }
+
+    function getInterval () public view returns (uint256) {
+        return i_interval;
     }
 }
